@@ -4,7 +4,7 @@ namespace Drupal\ambientimpact_web\EventSubscriber\Theme;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\core_event_dispatcher\Event\Theme\ThemeEvent;
-use Drupal\hook_event_dispatcher\HookEventDispatcherInterface;
+use Drupal\core_event_dispatcher\ThemeHookEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -36,7 +36,7 @@ class ThemeWebSnippetsLinks implements EventSubscriberInterface {
    */
   public static function getSubscribedEvents() {
     return [
-      HookEventDispatcherInterface::THEME => 'onTheme',
+      ThemeHookEvents::THEME => 'onTheme',
     ];
   }
 
