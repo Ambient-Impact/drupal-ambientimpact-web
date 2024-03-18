@@ -71,6 +71,15 @@ class ComponentItemDemoController extends ControllerBase {
 
     $renderArray = [
       '#theme'  => 'ambientimpact_component_demo',
+      // Use the same cache metadata as component discovery to rebuild this when
+      // component discovery is done.
+      //
+      // @todo Can we instead use Drupal\Core\Cache\RefinableCacheableDependencyInterface::addCacheableDependency()?
+      '#cache'  => [
+        'contexts'  => $this->componentManager->getCacheContexts(),
+        'max-age'   => $this->componentManager->getCacheMaxAge(),
+        'tags'      => $this->componentManager->getCacheTags(),
+      ],
     ];
 
     $componentRenderArray = $plugin->getDemo();

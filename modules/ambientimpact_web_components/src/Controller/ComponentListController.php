@@ -55,6 +55,15 @@ class ComponentListController extends ControllerBase {
       '#attached' => [
         'library'   => 'ambientimpact_web_components/component.component_list',
       ],
+      // Use the same cache metadata as component discovery to rebuild this when
+      // component discovery is done.
+      //
+      // @todo Can we instead use Drupal\Core\Cache\RefinableCacheableDependencyInterface::addCacheableDependency()?
+      '#cache'  => [
+        'contexts'  => $this->componentManager->getCacheContexts(),
+        'max-age'   => $this->componentManager->getCacheMaxAge(),
+        'tags'      => $this->componentManager->getCacheTags(),
+      ],
     ];
 
     $pluginDefinitions = $this->componentManager->getDefinitions();

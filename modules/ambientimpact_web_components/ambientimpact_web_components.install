@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Invalidate tags to re-cache new component page cache tags (very meta).
+ */
+function ambientimpact_web_components_update_10201(): void {
+
+  // Since we didn't have any specific cache tags on these pages (whoops) until
+  // this update, we have to invalidate HTTP response and rendered output cache
+  // tags to force a rebuild. It's not ideal, but we only have to do this once
+  // and the new cache tags from the component plug-in manager will get set on
+  // the cached component page output, allowing future updates to more
+  // accurately invalidate just what we need.
+  \Drupal::service('cache_tags.invalidator')->invalidateTags([
+    'http_response',
+    'rendered',
+  ]);
+
+}

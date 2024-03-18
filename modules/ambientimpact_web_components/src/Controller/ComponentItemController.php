@@ -133,6 +133,15 @@ class ComponentItemController extends ControllerBase {
       // it can be manipulated by various components.
       '#description'    => $this->markupProcessor
         ->process($pluginDefinition['description']),
+      // Use the same cache metadata as component discovery to rebuild this when
+      // component discovery is done.
+      //
+      // @todo Can we instead use Drupal\Core\Cache\RefinableCacheableDependencyInterface::addCacheableDependency()?
+      '#cache'  => [
+        'contexts'  => $this->componentManager->getCacheContexts(),
+        'max-age'   => $this->componentManager->getCacheMaxAge(),
+        'tags'      => $this->componentManager->getCacheTags(),
+      ],
     ];
 
     if ($componentInstance->hasDemo() === true) {
