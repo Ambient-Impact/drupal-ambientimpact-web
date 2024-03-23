@@ -71,6 +71,9 @@ class ComponentItemDemoController extends ControllerBase {
 
     $renderArray = [
       '#theme'  => 'ambientimpact_component_demo',
+      '#attached' => ['library' => [
+        'ambientimpact_web_components/component.component_demo',
+      ]],
       // Use the same cache metadata as component discovery to rebuild this when
       // component discovery is done.
       //
