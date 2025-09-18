@@ -20,13 +20,6 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
   protected const CONFIG_NAME = 'ambientimpact_web.snippets';
 
   /**
-   * The Drupal node entity storage.
-   *
-   * @var \Drupal\node\NodeStorageInterface
-   */
-  protected $nodeStorage;
-
-  /**
    * Form constructor; saves dependencies.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
@@ -41,8 +34,6 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
   ) {
 
     parent::__construct($configFactory);
-
-    $this->nodeStorage  = $entityTypeManager->getStorage('node');
 
   }
 
@@ -75,6 +66,8 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
+    $nodeStorage  = $this->entityTypeManager->getStorage('node');
+
     $form['about_node'] = [
       '#type'               => 'entity_autocomplete',
       '#title'              => $this->t('About page'),
@@ -94,7 +87,7 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
     if (!\is_null($aboutNid)) {
 
       /** @var \Drupal\node\NodeInterface|null */
-      $aboutNode = $this->nodeStorage->load($aboutNid);
+      $aboutNode = $nodeStorage->load($aboutNid);
 
       if (\is_object($aboutNode)) {
         $form['about_node']['#default_value'] = $aboutNode;
