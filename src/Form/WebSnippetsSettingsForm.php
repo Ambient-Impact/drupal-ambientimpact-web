@@ -3,6 +3,7 @@
 namespace Drupal\ambientimpact_web\Form;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Config\TypedConfigManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -25,15 +26,19 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   The Drupal configuration object factory service.
    *
+   * @param \Drupal\Core\Config\TypedConfigManagerInterface $typedConfigManager
+   *   The Drupal typed config manager.
+   *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
    *   The Drupal entity type plug-in manager.
    */
   public function __construct(
-    ConfigFactoryInterface      $configFactory,
-    EntityTypeManagerInterface  $entityTypeManager
+    ConfigFactoryInterface $configFactory,
+    TypedConfigManagerInterface $typedConfigManager,
+    protected readonly EntityTypeManagerInterface $entityTypeManager,
   ) {
 
-    parent::__construct($configFactory);
+    parent::__construct($configFactory, $typedConfigManager);
 
   }
 
@@ -43,7 +48,8 @@ class WebSnippetsSettingsForm extends ConfigFormBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('config.factory'),
-      $container->get('entity_type.manager')
+      $container->get('config.typed'),
+      $container->get('entity_type.manager'),
     );
   }
 

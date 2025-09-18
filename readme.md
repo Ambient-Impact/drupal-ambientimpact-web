@@ -9,7 +9,7 @@ work-in-progress. Stable releases may be provided at a later date.
 
 # Requirements
 
-* [Drupal 9.5, 10, or 11](https://www.drupal.org/download)
+* [Drupal 11.1](https://www.drupal.org/download)
 
 * [Composer](https://getcomposer.org/)
 
@@ -121,3 +121,11 @@ The following major version bumps indicate breaking changes:
   * Requires Drupal 9.5 or [Drupal 10](https://www.drupal.org/project/drupal/releases/10.0.0) with compatibility and deprecation fixes for the latter.
 
   * Increases minimum version of [Hook Event Dispatcher](https://www.drupal.org/project/hook_event_dispatcher) to 3.1, removes deprecated code, and adds support for 4.0 which supports Drupal 10.
+
+* 3.x:
+
+  * Requires PHP 8.1.
+
+  * Requires Drupal 11.1.
+
+  * Increases minimum version of [Hook Event Dispatcher](https://www.drupal.org/project/hook_event_dispatcher) to 4.0.
